@@ -49,7 +49,7 @@ export default function ProfileDetailScreen() {
 
     const handleSignOut = async () => {
         await AsyncStorage.clear();
-        router.replace("/login");
+        router.replace("/loginscreen");
     };
 
     const handleDeleteAccount = () => {
