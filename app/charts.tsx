@@ -86,10 +86,10 @@ const PieChart = ({ data, total }: { data: ChartItem[]; total: number }) => {
           fill="#fff"
         />
         <SvgText
-          x="100"
+          x="90"
           y="105"
           textAnchor="middle"
-          fontSize="14"
+          fontSize="12"
           fill="#000"
           fontWeight="bold"
         >
@@ -368,20 +368,36 @@ const styles = StyleSheet.create({
     marginVertical: 12,
   },
   iconLabel: {
-    width: 110,
+    width: 100,
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
+    gap: 6,
   },
-  itemName: { fontSize: 14, fontWeight: "600", color: "#222" },
-  progressWrapper: {
-    flex: 1,
-    backgroundColor: "#eee",
-    height: 8,
-    borderRadius: 12,
-    overflow: "hidden",
-    marginRight: 12,
-  },
+  rowContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between', // Keeps space between text and bar
+  paddingHorizontal: 8,
+  marginBottom: 4,
+},
+
+itemName: {
+  fontSize: 9,
+  fontWeight: "600",
+  color: "#222",
+  flexShrink: 1,         // Prevents overflow by shrinking text
+  marginRight: 8,        // Adds spacing between text and bar
+},
+
+progressWrapper: {
+  flex: 1,
+  backgroundColor: "#eee",
+  height: 8,
+  borderRadius: 12,
+  overflow: "hidden",
+  maxWidth: '70%',       // Optional: limits how wide bar can grow
+},
+
   progressBar: { height: 8, borderRadius: 12 },
   rightLabels: { alignItems: "flex-end", width: 90 },
   percent: { fontSize: 12, color: "#555" },
