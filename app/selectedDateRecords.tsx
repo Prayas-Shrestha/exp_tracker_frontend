@@ -214,7 +214,7 @@ export default function SelectedDateRecordsScreen() {
                 <Text style={{ fontSize: 16 }}>{item.label?.trim() || item.category}</Text>
                 <Text style={{ fontSize: 12, color }}>{tag}</Text>
                 {item.note ? (
-                  <Text style={{ color: "gray", fontSize: 13 }}>{item.note}</Text>
+                  <Text style={{ color: "gray", fontSize: 13 }}>Note: {item.note}</Text>
                 ) : null}
               </View>
               <Text style={{ fontWeight: "600", color }}>{Math.abs(item.amount).toLocaleString()}</Text>
@@ -288,11 +288,14 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   summaryContainer: {
-    paddingHorizontal: 20,
-    paddingBottom: 10,
+    padding: 20,
+    flexDirection: 'row',  // Align children horizontally
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,  // Add a bottom border to the container
+    borderBottomColor: '#eee'  // Distribute space between items
   },
   summaryText: {
-    fontSize: 14,
+    fontSize: 11,
     fontWeight: "600",
     marginBottom: 4,
   },
