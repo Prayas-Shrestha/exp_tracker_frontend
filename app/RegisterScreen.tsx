@@ -14,25 +14,45 @@ const RegisterScreen = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleRegister = async () => {
-        // Validation from first code
+        // Empty field check
         if (!name || !email || !password || !confirmPassword) {
-            return Alert.alert("All fields are required.");
+            Alert.alert("All fields are required.");
+            return;
         }
-
+    
+        // Email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            Alert.alert("Invalid email format.");
+            return;
+        }
+    
+        // Password strength validation
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^])[A-Za-z\d@$!%*#?&^]{8,}$/;
+        if (!passwordRegex.test(password)) {
+            Alert.alert(
+                "Weak password",
+                "Password must be at least 8 characters and include a letter, number, and special character."
+            );
+            return;
+        }
+    
+        // Password match
         if (password !== confirmPassword) {
-            return Alert.alert("Passwords do not match.");
+            Alert.alert("Passwords do not match.");
+            return;
         }
-
-        // Backend API call from first code
+    
+        // If all validations pass — send the request
         try {
             const res = await fetch("https://expenses-tracker-8k6o.onrender.com/api/auth/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name, email, password }),
             });
-
+    
             const data = await res.json();
-
+    
             if (res.ok) {
                 Alert.alert("Registration Successful", "You can now log in.", [
                     { text: "OK", onPress: () => router.push("/loginscreen") }
@@ -45,6 +65,7 @@ const RegisterScreen = () => {
             console.error("Registration error:", error);
         }
     };
+    
 
     return (
         <View style={styles.container}>
